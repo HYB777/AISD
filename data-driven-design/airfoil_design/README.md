@@ -1,8 +1,4 @@
-<style>
-.abc {
-    line-height:0px;
-}
-</style>
+
 
 # Airfoil Design
 
