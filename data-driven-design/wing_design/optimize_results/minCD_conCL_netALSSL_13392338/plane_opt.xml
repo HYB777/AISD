@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE explane>
+<explane version="1.0">
+    <Units>
+        <length_unit_to_meter>1</length_unit_to_meter>
+        <mass_unit_to_kg>1</mass_unit_to_kg>
+    </Units>
+    <Plane>
+        <Name>opt</Name>
+        <Description></Description>
+        <Inertia/>
+        <has_body>false</has_body>
+        <wing>
+            <Name>Main Wing</Name>
+            <Type>MAINWING</Type>
+            <Color>
+                <red>140</red>
+                <green>152</green>
+                <blue>168</blue>
+                <alpha>255</alpha>
+            </Color>
+            <Description></Description>
+            <Position>          0,           0,           0</Position>
+            <Tilt_angle>  0.000</Tilt_angle>
+            <Symetric>true</Symetric>
+            <isFin>false</isFin>
+            <isDoubleFin>false</isDoubleFin>
+            <isSymFin>false</isSymFin>
+            <Inertia>
+                <Volume_Mass>  0.000</Volume_Mass>
+            </Inertia>
+            <Sections>
+                <Section>
+                    <y_position>  0.0000</y_position>
+                    <Chord>  7.3200</Chord>
+                    <xOffset>  0.0000</xOffset>
+                    <Dihedral>  6.9965</Dihedral>
+                    <Twist>  1.6357</Twist>
+                    <x_number_of_panels>13</x_number_of_panels>
+                    <x_panel_distribution>COSINE</x_panel_distribution>
+                    <y_number_of_panels>13</y_number_of_panels>
+                    <y_panel_distribution>INVERSE SINE</y_panel_distribution>
+                    <Left_Side_FoilName>D:/project/wings_design/minCD_conCL_netALSSL_13392338/opt_root.dat</Left_Side_FoilName>
+                    <Right_Side_FoilName>D:/project/wings_design/minCD_conCL_netALSSL_13392338/opt_root.dat</Right_Side_FoilName>
+                </Section>
+                <Section>
+                    <y_position>  5.4000</y_position>
+                    <Chord>  3.2746</Chord>
+                    <xOffset>  4.0454</xOffset>
+                    <Dihedral>  6.9965</Dihedral>
+                    <Twist>  0.1238</Twist>
+                    <x_number_of_panels>13</x_number_of_panels>
+                    <x_panel_distribution>COSINE</x_panel_distribution>
+                    <y_number_of_panels>13</y_number_of_panels>
+                    <y_panel_distribution>INVERSE SINE</y_panel_distribution>
+                    <Left_Side_FoilName>D:/project/wings_design/minCD_conCL_netALSSL_13392338/opt_span30.dat</Left_Side_FoilName>
+                    <Right_Side_FoilName>D:/project/wings_design/minCD_conCL_netALSSL_13392338/opt_span30.dat</Right_Side_FoilName>
+                </Section>
+                <Section>
+                    <y_position> 12.6000</y_position>
+                    <Chord>  2.1177</Chord>
+                    <xOffset>  8.3799</xOffset>
+                    <Dihedral>  6.9965</Dihedral>
+                    <Twist> -0.7302</Twist>
+                    <x_number_of_panels>13</x_number_of_panels>
+                    <x_panel_distribution>COSINE</x_panel_distribution>
+                    <y_number_of_panels>13</y_number_of_panels>
+                    <y_panel_distribution>INVERSE SINE</y_panel_distribution>
+                    <Left_Side_FoilName>D:/project/wings_design/minCD_conCL_netALSSL_13392338/opt_span70.dat</Left_Side_FoilName>
+                    <Right_Side_FoilName>D:/project/wings_design/minCD_conCL_netALSSL_13392338/opt_span70.dat</Right_Side_FoilName>
+                </Section>
+                <Section>
+                    <y_position> 18.0000</y_position>
+                    <Chord>  1.2500</Chord>
+                    <xOffset> 11.6309</xOffset>
+                    <Dihedral> 49.8380</Dihedral>
+                    <Twist> -2.9057</Twist>
+                    <x_number_of_panels>13</x_number_of_panels>
+                    <x_panel_distribution>COSINE</x_panel_distribution>
+                    <y_number_of_panels>13</y_number_of_panels>
+                    <y_panel_distribution>INVERSE SINE</y_panel_distribution>
+                    <Left_Side_FoilName>D:/project/wings_design/minCD_conCL_netALSSL_13392338/opt_tip.dat</Left_Side_FoilName>
+                    <Right_Side_FoilName>D:/project/wings_design/minCD_conCL_netALSSL_13392338/opt_tip.dat</Right_Side_FoilName>
+                </Section>
+                <Section>
+                    <y_position> 21.6000</y_position>
+                    <Chord>  0.6250</Chord>
+                    <xOffset> 13.8068</xOffset>
+                    <Dihedral> 49.8380</Dihedral>
+                    <Twist> 1.0320</Twist>
+                    <x_number_of_panels>13</x_number_of_panels>
+                    <x_panel_distribution>COSINE</x_panel_distribution>
+                    <y_number_of_panels>13</y_number_of_panels>
+                    <y_panel_distribution>INVERSE SINE</y_panel_distribution>
+                    <Left_Side_FoilName>D:/project/wings_design/minCD_conCL_netALSSL_13392338/opt_winglet.dat</Left_Side_FoilName>
+                    <Right_Side_FoilName>D:/project/wings_design/minCD_conCL_netALSSL_13392338/opt_winglet.dat</Right_Side_FoilName>
+                </Section>
+            </Sections>
+        </wing>
+    </Plane>
+</explane>
+    
