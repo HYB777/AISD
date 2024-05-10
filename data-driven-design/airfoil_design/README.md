@@ -66,7 +66,7 @@ The corresponding network's parameters are stored in
 [results-al-semi-734](mean-teacher-al/results-al-semi-734), respectively. 
 And the learning results are as follows.
 
-|  Ma   | $\text{RMAE}_{C_L}$ | $\text{RMAE}_{C_D}$ |
+| $Ma$  | $\text{RMAE}_{C_L}$ | $\text{RMAE}_{C_D}$ |
 |:-----:|:-------------------:|:-------------------:|
 | 0.150 |      5.193E-3       |      2.156E-2       |
 | 0.734 |      1.058E-2       |      6.690E-2       |
