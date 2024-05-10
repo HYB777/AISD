@@ -11,6 +11,7 @@ Basic python environment and the following package:
 * [xfoil](https://github.com/DARcorporation/xfoil-python/tree/master)
 * [aerosandbox](https://github.com/peterdsharpe/AeroSandbox)
 * [pyBEMT](https://github.com/kegiljarhus/pyBEMT)
+* [skdim](https://scikit-dimension.readthedocs.io/en/latest/index.html)
 
 ## Experiments
 
