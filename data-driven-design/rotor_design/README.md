@@ -7,7 +7,12 @@ thus improving the efficiency of the rotor.
 ## Shape Sampling
 
 The rotor model is consist of $n_{\text{blade}}$ blades, each blade is modeled by
-lofting four airfoil sections. Similar to the [wing design](../wing_design), 
+lofting four airfoil sections, as shown in the following figure. 
+<div>
+<img src="figs/rotor_design_1.svg">
+</div>
+
+Similar to the [wing design](../wing_design), 
 we use the airfoil generated in [airfoil design](../airfoil_design) to build the dataset.
 See Appendix E for more details.
 
@@ -31,6 +36,12 @@ Then run the following code.
 ```
 python main.py
 ```
+The corresponding network's parameters are stored in [results-al](results_al).
+And the learning results are as follows.
+
+| \text{RMAE}_{C_T} | $\text{RMAE}_{C_Q}$ |
+|:-----------------:|:-------------------:|
+|      2.749-3      |      2.784E-3       |
 
 ## Shape Anomaly Detection
 
@@ -43,4 +54,10 @@ Run the following code.
 ```
 python shape_opt.py
 ```
-And the optimized results will be stored in [optimize_results](optimize_results).
+And the optimized results will be stored in [optimize_results](optimize_results), which are shown as follows.
+
+<div align="center">
+<img src="figs/rotor-p.svg">
+<img src="figs/rotor-v.svg">
+<img src="figs/rotor-cp.svg">
+</div>
