@@ -47,7 +47,7 @@ Run the following code.
 ```
 python shape_opt.py
 ```
-And the optimized results will be stored in [optimize_results](optimize_results), And the optimized results are located in [optimize_results](optimize_results), 
+And the optimized results will be stored in [optimize_results](optimize_results),
 which are shown as follows.
 
 <div align="center">
