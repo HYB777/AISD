@@ -50,5 +50,7 @@ python shape_opt.py
 And the optimized results will be stored in [optimize_results](optimize_results), And the optimized results are located in [optimize_results](optimize_results), 
 which are shown as follows.
 
-<img src="figs/wings_init2opt_res1.svg" width="700">
+<div align="center">
+<img src="figs/wings_init2opt_res1.svg" width="500">
+</div>
 <img src="figs/wings_init2opt_res2.svg" width="700">
