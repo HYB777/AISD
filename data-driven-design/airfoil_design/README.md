@@ -106,7 +106,7 @@ We use naca2412 as the initial airfoil. Run the following code.
 python shapeOptALSSL.py --ma 150 # 734
 ```
 
-And the optimized results are located in [optimize_results](optimize_results).
+And the optimized results are located in [optimize_results](optimize_results), which are shown as follows.
 
 <div align="center">
 <img src="figs/ma150.svg">
