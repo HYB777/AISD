@@ -14,6 +14,11 @@ at the leading edge (0, 0) and the trailing edge (1, 0). The control points data
 [data_bs/controls](data/controls). Finally, all control points data are concatenated in a numpy array 
 [bs_datas.npy](data_bs/bs_datas.npy).
 
+<figure align="center">
+    <img src="figs/airfoils_params.svg">
+    <figcaption>airfoil parameters</figcaption>
+</figure>
+
 ## Shape Sampling
 Firstly, we shall enrich the control points data. We apply WGAN-GP to do it. Run the following code
 
@@ -53,7 +58,14 @@ python main.py --ma 734 # compressible fluid case
 
 The corresponding network's parameters are stored in 
 [results-al-semi-150](mean-teacher-al/results-al-semi-150) and 
-[results-al-semi-734](mean-teacher-al/results-al-semi-734), respectively.
+[results-al-semi-734](mean-teacher-al/results-al-semi-734), respectively. 
+And the learning results are as follows.
+
+|  Ma   | $\text{RMAE}_{C_L}$ | $\text{RMAE}_{C_D}$ |
+|:-----:|:-------------------:|:-------------------:|
+| 0.150 |      5.193E-3       |      2.156E-2       |
+| 0.734 |      1.058E-2       |      6.690E-2       |
+
 
 ## Shape Anomaly Detection
 
@@ -69,6 +81,12 @@ Run the following code to train the auto-encoder.
 python main_ae.py --embed-dim 16
 ```
 The corresponding parameters are stored in [resultsAE_ID=16_wgan](shape-anomaly-detection/resultsAE_ID=16_wgan).
+And the result are as follows.
+
+|       index       |  value   |
+|:-----------------:|:--------:|
+|   ReconErr mean   | 2.283E-3 |
+| ReconErr variance | 2.199E-5 |
 
 ## Numerical Optimization
 
@@ -79,3 +97,10 @@ python shapeOptALSSL.py --ma 150 # 734
 ```
 
 And the optimized results are located in [optimize_results](optimize_results).
+
+<figure align="center">
+    <img src="figs/ma150.svg">
+    <figcaption>mach=0.150</figcaption>
+    <img src="figs/ma734.svg">
+    <figcaption>mach=0.734</figcaption>
+</figure>
