@@ -1,5 +1,3 @@
-
-
 # Airfoil Design
 
 The airfoil design is aimed to minimize the drag coefficient ($C_D$) while keeping lift coefficient ($C_L$) greater
@@ -16,10 +14,8 @@ at the leading edge (0, 0) and the trailing edge (1, 0). The control points data
 [data_bs/controls](data/controls). Finally, all control points data are concatenated in a numpy array 
 [bs_datas.npy](data_bs/bs_datas.npy).
 
-<div class="abc" align="center">
+<div align="center">
 <img src="figs/airfoils_params.svg">
-
-airfoil parameters
 </div>
 
 
@@ -85,10 +81,8 @@ The result should be 5(round up). This give a lower bound of the dimension of la
 For verifying that the value is sufficient, we examine the reconstruction error as a function
 of the dimension of latent space, which are shown as follows.
 
-<div align="center" class="abc">
+<div align="center">
     <img src="figs/airfoil_id.svg">
-
-reconstruction error with respect to dimension of latent space
 </div>
 
 
@@ -114,15 +108,11 @@ python shapeOptALSSL.py --ma 150 # 734
 
 And the optimized results are located in [optimize_results](optimize_results).
 
-<div align="center" class="abc">
+<div align="center">
 <img src="figs/ma150.svg">
-
 mach = 0.150
-</div>
 
-
-<div align="center" class="abc">
 <img src="figs/ma734.svg">
-
 mach = 0.734
 </div>
+
