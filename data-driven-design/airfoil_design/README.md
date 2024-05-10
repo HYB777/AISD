@@ -89,7 +89,7 @@ The result should be 5(round up). This give a lower bound of the dimension of la
 For verifying that the value is sufficient, we examine the reconstruction error as a function
 of the dimension of latent space, which are shown as follows.
 
-<div align="center" >
+<div align="center" class="abc">
     <img src="figs/airfoil_id.svg">
 
 reconstruction error with respect to dimension of latent space
