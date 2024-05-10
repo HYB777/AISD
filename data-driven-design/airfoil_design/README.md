@@ -1,6 +1,6 @@
 <style>
 .abc {
-    line-height:1px;
+    line-height:0px;
 }
 </style>
 
@@ -92,7 +92,7 @@ of the dimension of latent space, which are shown as follows.
 <div align="center" >
     <img src="figs/airfoil_id.svg">
 
-<figcaption>reconstruction error with respect to dimension of latent space</figcaption>
+reconstruction error with respect to dimension of latent space
 </div>
 
 
