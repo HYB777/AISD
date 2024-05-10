@@ -14,10 +14,10 @@ at the leading edge (0, 0) and the trailing edge (1, 0). The control points data
 [data_bs/controls](data/controls). Finally, all control points data are concatenated in a numpy array 
 [bs_datas.npy](data_bs/bs_datas.npy).
 
-<figure align="center">
+<p align="center">
     <img src="figs/airfoils_params.svg">
-    <figcaption>airfoil parameters</figcaption>
-</figure>
+    airfoil parameters
+</p>
 
 ## Shape Sampling
 Firstly, we shall enrich the control points data. We apply WGAN-GP to do it. Run the following code
@@ -98,9 +98,9 @@ python shapeOptALSSL.py --ma 150 # 734
 
 And the optimized results are located in [optimize_results](optimize_results).
 
-<figure align="center">
+<p align="center">
     <img src="figs/ma150.svg">
-    <figcaption>mach=0.150</figcaption>
+    mach = 0.150
     <img src="figs/ma734.svg">
-    <figcaption>mach=0.734</figcaption>
-</figure>
+    mach = 0.734
+</p>
