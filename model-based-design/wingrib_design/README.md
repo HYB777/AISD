@@ -46,9 +46,7 @@ Run the following code under [mean-teacher-al](mean-teacher-al).
 python main.py
 ```
 
-The trained model is stored in [net_best_teacher.tar](mean-teacher-al/results-al-semi/net_best_teacher.tar). And the learning results are as follows.
-
-
+The trained model is stored in [net_best_teacher.tar](mean-teacher-al/results-al-semi/net_best_teacher.tar).
 
 ## Shape Anomaly Detection
 
@@ -80,6 +78,13 @@ python main_ae.py --embed-dim 24
 ```
 The corresponding parameters are stored in [results_ae_ID=24](shape-anomaly-detection/results_ae_ID=24).
 
+The learning results of physical model and auto-encoder are documented in the following table.
+
+| $\text{RMAE}_{F_{\text{vm}}$ |   ReconErr mean    | ReconErr variance |
+|:----------------------------:|:------------------:|:-----------------:|
+|          1.1393E-1           |     1.1821E-2      |     7.4780E-6     |
+
+
 
 ## Numerical Optimization
 
@@ -89,4 +94,9 @@ We use naca2412 as the initial airfoil. Run the following code.
 python shapeOpt.py
 ```
 
-And the optimized results are located in [optimize_results](optimized_results).
+And the optimized results are located in [optimize_results](optimized_results), 
+which is optimized with from an initial configuration with mass 4646.53 kg and $F_{\text{vm}$ 189.55MPa.
+The results are shown as follows.
+<div align="center">
+    <img src="figs/wingrib_opt.svg">
+</div>
