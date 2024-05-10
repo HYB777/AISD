@@ -1,3 +1,9 @@
+<style>
+.abc {
+    line-height:1px;
+}
+</style>
+
 # Airfoil Design
 
 The airfoil design is aimed to minimize the drag coefficient ($C_D$) while keeping lift coefficient ($C_L$) greater
@@ -14,13 +20,9 @@ at the leading edge (0, 0) and the trailing edge (1, 0). The control points data
 [data_bs/controls](data/controls). Finally, all control points data are concatenated in a numpy array 
 [bs_datas.npy](data_bs/bs_datas.npy).
 
-<div align="center">
-<figure>
-    <img src="figs/airfoils_params.svg">
-    <figcaption>
-    airfoil parameters
-    </figcaption>
-</figure>
+<div  align="center">
+<img src="figs/airfoils_params.svg">
+<figcaption>airfoil parameters</figcaption>
 </div>
 
 
@@ -72,6 +74,8 @@ And the learning results are as follows.
 | 0.734 |      1.058E-2       |      6.690E-2       |
 
 
+
+
 ## Shape Anomaly Detection
 
 The critical factor impacting the performance of auto-encoder training 
@@ -80,8 +84,18 @@ So run the following code.
 ```
 python lpca.py
 ```
-The result should be 5(round up). This give a lower bound of the dimension of latent space. In our experiment, we choose 16.
-Run the following code to train the auto-encoder.
+The result should be 5(round up). This give a lower bound of the dimension of latent space. 
+For verifying that the value is sufficient, we examine the reconstruction error as a function
+of the dimension of latent space, which are shown as follows.
+
+<div align="center" >
+    <img src="figs/airfoil_id.svg">
+
+<figcaption>reconstruction error with respect to dimension of latent space</figcaption>
+</div>
+
+
+In our experiment, we choose 16. Run the following code to train the auto-encoder.
 ```
 python main_ae.py --embed-dim 16
 ```
