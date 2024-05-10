@@ -20,9 +20,10 @@ at the leading edge (0, 0) and the trailing edge (1, 0). The control points data
 [data_bs/controls](data/controls). Finally, all control points data are concatenated in a numpy array 
 [bs_datas.npy](data_bs/bs_datas.npy).
 
-<div  align="center">
+<div class="abc" align="center">
 <img src="figs/airfoils_params.svg">
-<figcaption>airfoil parameters</figcaption>
+
+airfoil parameters
 </div>
 
 
@@ -117,9 +118,15 @@ python shapeOptALSSL.py --ma 150 # 734
 
 And the optimized results are located in [optimize_results](optimize_results).
 
-<div align="center">
-    <img src="figs/ma150.svg">
-    <figcaption>mach = 0.150</figcaption>
-    <img src="figs/ma734.svg">
-    <figcaption>mach = 0.734</figcaption>
+<div align="center" class="abc">
+<img src="figs/ma150.svg">
+
+mach = 0.150
+</div>
+
+
+<div align="center" class="abc">
+<img src="figs/ma734.svg">
+
+mach = 0.734
 </div>
