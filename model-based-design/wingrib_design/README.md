@@ -80,9 +80,9 @@ The corresponding parameters are stored in [results_ae_ID=24](shape-anomaly-dete
 
 The learning results of physical model and auto-encoder are documented in the following table.
 
-| $\text{RMAE}_{{F}_{\text{vm}}}$ |   ReconErr mean    | ReconErr variance |
-|:-------------------------------:|:------------------:|:-----------------:|
-|            1.1393E-1            |     1.1821E-2      |     7.4780E-6     |
+| $\text{RMAE}_{F_\text{vm}}$ |   ReconErr mean    | ReconErr variance |
+|:---------------------------:|:------------------:|:-----------------:|
+|          1.1393E-1          |     1.1821E-2      |     7.4780E-6     |
 
 
 
