@@ -2,9 +2,9 @@
 The source code for the paper _AI-Based Shape Design_.
 
 
-## Package Requirement
+## Packages Requirement
 
-Basic python environment and other package:
+Basic python environment and the following package:
 
 * [torch](https://pytorch.org/)
 * [pyoptsparse](https://mdolab-pyoptsparse.readthedocs-hosted.com/en/latest/)
@@ -28,7 +28,7 @@ for this part of experiment are in [model-based-design](model-based-design).
 
 A general steps of experiment are shown as follows.
 
-![AI-based Design Scheme](scheme.png)
+![AI-based Design Scheme](schemeV3-1-md.svg)
 
 ### Step1: Shape Sampling
 When obtain an initial dataset, if the amount of data is not enough, we need to
