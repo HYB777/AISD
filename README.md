@@ -28,7 +28,7 @@ for this part of experiment are in [model-based-design](model-based-design).
 
 A general steps of experiment are shown as follows.
 
-![AI-based Design Scheme](scheme.png "scheme")
+![AI-based Design Scheme](scheme.png)
 
 ### Step1: Shape Sampling
 When obtain an initial dataset, if the amount of data is not enough, we need to
