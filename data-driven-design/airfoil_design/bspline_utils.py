@@ -168,7 +168,7 @@ class BsplineArea:
 
         plt.close()
         # plt.clf()
-        plt.figure(i)
+        f, ax = plt.subplots()
 
         plt.plot(x_up[:, 0], x_up[:, 1], 'ro-', label='Bspline control points')
         plt.plot(x_down[:, 0], x_down[:, 1], 'ro-')
@@ -204,11 +204,22 @@ class BsplineArea:
         xf.reset_bls()
         xf.airfoil = Airfoil(hat_data[:, 0], hat_data[:, 1])
         xf.repanel()
-        xf.reset_bls()
+        # xf.reset_bls()
         xf.Re = 6.5e6
         xf.M = ma / 1000.
         xf.max_iter = 100
         res_ = xf.a(alfa)
+        if np.isnan(res_[0]):
+            xf = XFoil()
+            xf.print = 0
+            xf.reset_bls()
+            xf.airfoil = Airfoil(hat_data[:, 0], hat_data[:, 1])
+            xf.repanel()
+            # xf.reset_bls()
+            xf.Re = 6.5e6
+            xf.M = ma / 1000.
+            xf.max_iter = 100
+            res_ = xf.a(alfa)
         print('cl: ', res_[0], 'cd: ', res_[1], 'alfa: ', alfa, 'cl/cd: ', res_[0] / res_[1])
 
         if filename is None:
@@ -216,7 +227,10 @@ class BsplineArea:
         else:
             np.save('%s_c.npy' % filename, x_copy)
             np.save('%s.npy' % filename, hat_data)
-            plt.savefig('%s.svg' % filename)
+            isnan = np.isnan(res_[0])
+            plt.text(0.05, 0.95, '$C_L=%.4e$' % res_[0] if not isnan else '$C_L=NaN$', ha='left', va='top', transform=ax.transAxes)
+            plt.text(0.05, 0.85, '$C_D=%.4e$' % res_[1] if not isnan else '$C_D=NaN$', ha='left', va='top', transform=ax.transAxes)
+            plt.savefig('%s.jpg' % filename)
 
     def eval(self, x):
 
