@@ -204,7 +204,7 @@ class BsplineArea:
         xf.reset_bls()
         xf.airfoil = Airfoil(hat_data[:, 0], hat_data[:, 1])
         xf.repanel()
-        # xf.reset_bls()
+        # xf.reset_bls()?
         xf.Re = 6.5e6
         xf.M = ma / 1000.
         xf.max_iter = 100
