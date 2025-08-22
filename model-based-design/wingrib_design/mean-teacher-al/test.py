@@ -84,10 +84,15 @@ with torch.no_grad():
     vm_rmae = 0
     mass_rmae = 0
 
+    N=len(test_set)
+
     rmae1_u = 0
     rmae2_u = 0
     rmae1_d = 0
     rmae2_d = 0
+
+    rmae1s = 0.
+    rmae2s = 0.
 
     for X, vm, mass in test_bar:
 
@@ -106,6 +111,9 @@ with torch.no_grad():
         rmae2_u += torch.abs(mass.reshape(-1) - z2.reshape(-1)).sum().item()
         rmae2_d += torch.abs(mass).sum().item()
 
+        rmae1s += (torch.abs(vm.reshape(-1) - z1.reshape(-1))/ torch.abs(vm).reshape(-1)).sum().item()
+        rmae2s += (torch.abs(mass.reshape(-1) - z2.reshape(-1)) / torch.abs(mass).reshape(-1)).sum().item()
+
         total_loss += loss.item()
         vm_rmae += rmae1
         mass_rmae += rmae2
@@ -115,5 +123,5 @@ with torch.no_grad():
 
     print('testing phase: loss: %.4e  vm_rmae: %.4e  mass_rmae: %.4e'
           % (total_loss / len(test_loader),
-             rmae1_u / rmae1_d,
-             rmae2_u / rmae2_d))
+             rmae1s / N,
+             rmae2s / N))
