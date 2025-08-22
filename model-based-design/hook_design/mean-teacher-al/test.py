@@ -67,7 +67,7 @@ labels_tesst[:, 1] /= scale_vol
 
 test_set = DataLoaderFit(param_test, labels_tesst)
 test_loader = torch.utils.data.DataLoader(dataset=test_set, num_workers=4,
-                                          batch_size=1000, shuffle=False, drop_last=False,
+                                          batch_size=128, shuffle=False, drop_last=False,
                                           pin_memory=False, worker_init_fn=_init_fn)
 
 fit_loss = nn.L1Loss()
@@ -95,6 +95,9 @@ with torch.no_grad():
     rmae2_u = 0
     rmae1_d = 0
     rmae2_d = 0
+    rmae1s = 0.
+    rmae2s = 0.
+    N = len(test_set)
 
     for X, vm, mass in test_bar:
 
@@ -112,6 +115,8 @@ with torch.no_grad():
         rmae1_d += torch.abs(vm).sum().item()
         rmae2_u += torch.abs(mass.reshape(-1) - z2.reshape(-1)).sum().item()
         rmae2_d += torch.abs(mass).sum().item()
+        rmae1s += (torch.abs(vm.reshape(-1) - z1.reshape(-1))/torch.abs(vm).reshape(-1)).sum()
+        rmae2s += (torch.abs(mass.reshape(-1) - z2.reshape(-1)) / torch.abs(mass).reshape(-1)).sum()
 
         total_loss += loss.item()
         vol_rmae += rmae1
@@ -122,5 +127,9 @@ with torch.no_grad():
 
     print('testing phase: loss: %.4e  se: %.4e  vol: %.4e'
           % (total_loss / len(test_loader),
-             rmae1_u / rmae1_d,
-             rmae2_u / rmae2_d))
+             rmae1s/N,
+             rmae2s/N))
+    print(rmae1s/N, rmae2s/N)
+
+    # rmae1_u / rmae1_d,.
+    # rmae2_u / rmae2_d))
