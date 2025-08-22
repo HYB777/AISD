@@ -6,7 +6,7 @@ from nets import *
 import numpy as np
 from collector import DataLoaderDICT_CLDMP
 from tqdm import tqdm
-from copy import copy
+from copy import copy, deepcopy
 
 
 # 150: cl: 1.0504e-02  cd: 2.6301e-02
@@ -16,8 +16,8 @@ def _init_fn(worker_id):
     np.random.seed(1 + worker_id)
 
 
-path = 'results-al-semi-734'
-# path = 'results-al-semi-150'
+# path = 'results-al-semi-734'
+path = 'results-al-semi-150'
 player_type = 'teacher'  # student, teacher, both
 
 
@@ -43,7 +43,7 @@ for player in players:
     net_i.load_state_dict(check_i[player])
     net_i.cpu()
     net_i.eval()
-    nets.append(copy(net_i))
+    nets.append(deepcopy(net_i).cuda())
 
 MA = int(path.split('-')[-1])
 if MA == 150:
@@ -56,18 +56,25 @@ else:
 data012 = np.load('../config/remake_data_v2_ma%d.npy' % MA, allow_pickle=True).item()
 
 test_ind = np.load('test_ind_ma%d_v2.npy' % MA)
-data012['res'] = data012['res'].reshape((-1, BASE, 5))
+# data012['res'] = data012['res'].reshape((-1, BASE, 5))
+# ind = (data012['res'][:, :, 2] < 1e-3) + (data012['res'][:, :, 1] < 1e-3)
+# data012['res'][ind] = -100
+# np.save('../config/remake_data_v2_ma%d.npy' % MA, data012)
+
+# input('sfd')
 for k in data012.keys():
     data012[k] = data012[k][test_ind]
 data012['res'] = data012['res'].reshape((-1, 5))
-data012['res'][:, 0] = data012['res'][:, 0]  # / ALFAMAX
+# ind = (data012['res'][:, 2] < 1e-3) + (data012['res'][:, 1] < 1e-3)
+# data012['res'][ind] = -100
+# data012['res'][:, 0] = data012['res'][:, 0]  # / ALFAMAX
 # data012['res'][:, 1] = data012['res'][:, 1] / scale_cl
 # data012['res'][:, 2] = data012['res'][:, 2] / scale_cd
 
 test_set = DataLoaderDICT_CLDMP(data012, BASE, 0)
 test_set.scale = scales
 test_loader = torch.utils.data.DataLoader(dataset=test_set, num_workers=4,
-                                          batch_size=1000, shuffle=False, drop_last=False,
+                                          batch_size=100, shuffle=False, drop_last=False,
                                           pin_memory=False, worker_init_fn=_init_fn)
 
 fit_loss = nn.L1Loss()
@@ -77,7 +84,7 @@ def nets_(X, paras):
     z1 = 0
     z2 = 0
     for i in range(N_nets):
-        z12_ = nets[i](X, paras)
+        z12_ = nets[i](X.cuda(), paras.cuda()).cpu()
         z1 += z12_[:, 0]
         z2 += z12_[:, 1]
     return z1 / N_nets, z2 / N_nets
@@ -94,22 +101,41 @@ with torch.no_grad():
     rmae1_d = 0
     rmae2_d = 0
 
-    for X, alfa, cl, cd, cm, cp in test_bar:
+    rmae1s = 0.
+    rmae2s = 0.
+    N = 0
+    iii = -1
 
+    for X, alfa, cl, cd, cm, cp in test_bar:
+        iii += 1
         solved = cd >= 0
+        if solved.sum() == 0:
+            continue
+        X = X[solved]
+        alfa = alfa[solved]
+        cl = cl[solved]
+        cd = cd[solved]
+        N += solved.sum()
 
         z1, z2 = nets_(X, alfa)
         # print(cl, z1)
 
         loss = fit_loss(z1.reshape(-1), cl.reshape(-1)) + \
                fit_loss(z2.reshape(-1), cd.reshape(-1))
-        rmae1 = ((torch.abs(cl.reshape(-1) - z1.reshape(-1))*solved).sum() / torch.abs(cl*solved).sum()).item()
-        rmae2 = ((torch.abs(cd.reshape(-1) - z2.reshape(-1))*solved).sum() / torch.abs(cd*solved).sum()).item()
+        # if iii > 101:
+        #     print(z1, z2, cl, cd)
+        # if iii >= 203:
+        #     input('..')
+        rmae1 = ((torch.abs(cl.reshape(-1) - z1.reshape(-1))).sum() / torch.abs(cl).sum()).item()
+        rmae2 = ((torch.abs(cd.reshape(-1) - z2.reshape(-1))).sum() / torch.abs(cd).sum()).item()
 
-        rmae1_u += torch.abs((cl.reshape(-1) - z1.reshape(-1))*solved).sum().item()
-        rmae1_d += torch.abs(cl*solved).sum().item()
-        rmae2_u += torch.abs((cd.reshape(-1) - z2.reshape(-1))*solved).sum().item()
-        rmae2_d += torch.abs(cd*solved).sum().item()
+        rmae1_u += torch.abs(cl.reshape(-1) - z1.reshape(-1)).sum().item()
+        rmae1_d += torch.abs(cl).sum().item()
+        rmae2_u += torch.abs(cd.reshape(-1) - z2.reshape(-1)).sum().item()
+        rmae2_d += torch.abs(cd).sum().item()
+
+        rmae1s += (torch.abs(cl.reshape(-1) - z1.reshape(-1)) / torch.abs(cl.reshape(-1))).sum()
+        rmae2s += (torch.abs(cd.reshape(-1) - z2.reshape(-1)) / torch.abs(cd.reshape(-1))).sum()
 
         total_loss += loss.item()
 
@@ -120,3 +146,4 @@ with torch.no_grad():
           % (total_loss / len(test_loader),
              rmae1_u / rmae1_d,
              rmae2_u / rmae2_d))
+    print('%.4e, %.4e' % (rmae1s / N, rmae2s / N), N)
