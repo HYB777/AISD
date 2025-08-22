@@ -125,6 +125,11 @@ with torch.no_grad():
     rmae2_d = 0
     rmae3_d = 0
 
+    rmae1s = 0.
+    rmae2s = 0.
+    rmae3s = 0.
+    N = len(test_set)
+
     for X, freq, vm, area in test_bar:
 
         # X = X.cuda()
@@ -146,6 +151,10 @@ with torch.no_grad():
         rmae3_u += torch.abs(area.reshape(-1) - z3.reshape(-1)).sum().item()
         rmae3_d += torch.abs(area).sum().item()
 
+        rmae1s += (torch.abs(freq.reshape(-1) - z1.reshape(-1))/torch.abs(freq.reshape(-1))).sum()
+        rmae2s += (torch.abs(vm.reshape(-1) - z2.reshape(-1)) / torch.abs(vm.reshape(-1))).sum()
+        rmae3s += (torch.abs(area.reshape(-1) - z3.reshape(-1)) / torch.abs(area.reshape(-1))).sum()
+
         total_loss += loss.item()
 
         test_bar.set_description(desc='loss: %.4e,  freq: %.4e,  vm: %.4e,  area: %.4e'
@@ -153,8 +162,11 @@ with torch.no_grad():
 
     print('testing phase: loss: %.4e  freq: %.4e  vm: %.4e  area: %.4e'
           % (total_loss / len(test_loader),
-             rmae1_u / rmae1_d,
-             rmae2_u / rmae2_d,
-             rmae3_u / rmae3_d,
+             rmae1s / N, rmae2s / N, rmae3s / N
              )
           )
+    print(rmae1s/N, rmae2s/N, rmae3s/N)
+
+    # rmae1_u / rmae1_d,
+    # rmae2_u / rmae2_d,
+    # rmae3_u / rmae3_d,
