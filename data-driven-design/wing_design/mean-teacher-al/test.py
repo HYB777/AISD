@@ -113,6 +113,10 @@ with torch.no_grad():
     rmae1_d = 0
     rmae2_d = 0
     rmae3_d = 0
+    rmae1s = 0.
+    rmae2s = 0.
+    rmae3s = 0.
+    N = len(test_set)
 
     for X, paras, cl, cd, vol in test_bar:
 
@@ -132,6 +136,9 @@ with torch.no_grad():
         rmae3_u += torch.abs(vol.reshape(-1) - z3.reshape(-1)).sum().item()
         rmae3_d += torch.abs(vol).sum().item()
 
+        rmae1s += (torch.abs(cl.reshape(-1) - z1.reshape(-1))/ torch.abs(cl).reshape(-1)).sum().item()
+        rmae2s += (torch.abs(cd.reshape(-1) - z2.reshape(-1))/ torch.abs(cd).reshape(-1)).sum().item()
+        rmae3s += (torch.abs(vol.reshape(-1) - z3.reshape(-1)) / torch.abs(vol).reshape(-1)).sum().item()
         total_loss += loss.item()
 
         test_bar.set_description(desc='loss: %.4e,  cl: %.4e,  cd: %.4e, vol: %.4e'
@@ -142,3 +149,5 @@ with torch.no_grad():
              rmae1_u / rmae1_d,
              rmae2_u / rmae2_d,
              rmae3_u / rmae3_d))
+
+    print(rmae1s/N, rmae2s/N, rmae3s/N)
